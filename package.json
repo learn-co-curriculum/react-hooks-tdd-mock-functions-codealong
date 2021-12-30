@@ -1,0 +1,22 @@
+{
+  "name": "react-hooks-tdd-mock-functions",
+  "version": "1.0.0",
+  "description": "Mock Functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "author": "Flatiron School",
+  "license": "See LICENSE.md file",
+  "type": "module",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.5",
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  }
+}
