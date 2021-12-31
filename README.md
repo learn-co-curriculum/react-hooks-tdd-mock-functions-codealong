@@ -215,10 +215,13 @@ original implementation after our `coinFlip` tests are done. Here's one way we
 can do that:
 
 ```js
+// save a reference to the original Math.random before running tests
+const originalRandom = Math.random;
+
 describe("coinFlip", () => {
   // add this function
   afterAll(() => {
-    Math.random.mockRestore();
+    Math.random = originalRandom;
   });
 
   it("returns false when the random value is less than or equal to 0.5", () => {
@@ -236,15 +239,18 @@ describe("coinFlip", () => {
 describe("a new feature", () => {
   it("uses the original implementation of Math.random", () => {
     expect(Math.random()).not.toBe(1);
+    expect(Math.random).toBe(originalRandom);
   });
 });
 ```
 
+First, we need to save a reference to the original `Math.random` to a new
+variable, since we'll be overwriting the implementation in our tests.
+
 Jest will run the callback we pass to the `afterAll` function after _all_ the
 tests in the `describe` function have finished, so we know that `Math.random`
 will only be mocked in the first `describe` block. After that, we restore it to
-the original implementation by using the `mockRestore` method that Jest provides
-for all mocked functions.
+the original implementation by using our saved reference.
 
 > There are a number of these [setup and teardown][setup-teardown] functions
 > that are useful in different scenarios, such as setting up some data to use in
